@@ -60,30 +60,33 @@ describe('Gilded Rose', () => {
     const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     expect(isBackstagePass(backstagePass)).toBe(true)
   });
-
   it("ensures that the main method can handle a backstage pass", () => {
     const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     expect(handleEndOfDayItem({ item: backstagePass })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 14, 21))
   });
+});
 
-  describe('Gilded Rose Backstage Pass', () => {
-    it("handles a regular backstage pass", () => {
-      const regularBackstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20);
-      expect(handleBackstagePass({ item: regularBackstagePass })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 14, 21));
-    });
 
-    it("increases quality by 2 when there are 10 days or less", () => {
-      const backstagePassFirstPriceIncrease = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20);
-      expect(handleBackstagePass({ item: backstagePassFirstPriceIncrease })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 9, 22));
-    });
 
-    it("increases quality by 3 when there are 5 days or less", () => {
-      const backstagePassSecondPriceIncrease = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20);
-      expect(handleBackstagePass({ item: backstagePassSecondPriceIncrease })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 4, 23));
-    });
-
-    it("drops quality to 0 after the concert", () => {
-      const backstagePassAfterConcert = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20);
-      expect(handleBackstagePass({ item: backstagePassAfterConcert })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0));
-    });
+describe('Gilded Rose Backstage Pass', () => {
+  it("handles a regular backstage pass", () => {
+    const regularBackstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20);
+    expect(handleBackstagePass({ item: regularBackstagePass })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 14, 21));
   });
+
+  it("increases quality by 2 when there are 10 days or less", () => {
+    const backstagePassFirstPriceIncrease = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20);
+    expect(handleBackstagePass({ item: backstagePassFirstPriceIncrease })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 9, 22));
+  });
+
+  it("increases quality by 3 when there are 5 days or less", () => {
+    const backstagePassSecondPriceIncrease = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20);
+    expect(handleBackstagePass({ item: backstagePassSecondPriceIncrease })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 4, 23));
+  });
+
+  it("drops quality to 0 after the concert", () => {
+    const backstagePassAfterConcert = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20);
+    expect(handleBackstagePass({ item: backstagePassAfterConcert })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0));
+  });
+});
+

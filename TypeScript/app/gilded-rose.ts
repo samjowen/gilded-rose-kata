@@ -129,6 +129,9 @@ export function handleEndOfDayItem({ item }: HandleEndOfDayItemParameters) {
       return handleAgedBrie({ item: item as AgedBrieObject })
     case (isItemLegendary(item, LEGENDARY_ITEMS as unknown as string[])):
       return handleLegendaryItem({ item: item as LegendaryItemObject })
+    case (isBackstagePass(item)):
+      return handleBackstagePass({ item })
+
     // fallthrough
 
   }
