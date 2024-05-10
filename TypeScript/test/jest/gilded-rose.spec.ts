@@ -49,6 +49,10 @@ describe('Gilded Rose', () => {
   it("the end of the day function can handle a legendary item", () => {
     const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
     expect(handleEndOfDayItem({ item: sulfuras })).toEqual(new Item("Sulfuras", 0, 80))
-  }
-  )
+  });
+
+  it("ensures that an items quality is never negative", () => {
+    const item = new Item("Item", 1, 0)
+    expect(degradeItem({ item, amount: 10 })).toEqual(new Item("Item", 1, 0))
+  });
 })
