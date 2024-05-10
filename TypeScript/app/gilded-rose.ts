@@ -174,5 +174,10 @@ export function isItemLegendary(item: Item, legendaryItems: string[]): item is L
   return legendaryItems.includes(item.name as LegendaryItemNames)
 }
 
+export function isBackstagePass(item: Item): Boolean {
+  return item.name === "Backstage passes to a TAFKAL80ETC concert"
+}
+
+
 
 
