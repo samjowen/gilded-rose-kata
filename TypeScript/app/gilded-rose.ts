@@ -9,6 +9,9 @@ export class Item {
     this.quality = quality;
   }
 }
+const LEGENDARY_ITEMS = ["Sulfuras"] as const
+
+type LegendaryItemNames = typeof LEGENDARY_ITEMS[number]
 
 
 export class GildedRose {
@@ -97,13 +100,30 @@ export function appreciateItem({ item, amount }: DegradeItemParameters) {
   return { name: item.name, quality: item.quality + amount, sellIn: item.sellIn }
 }
 
-type handleEndOfDayItemParameters = {
+type HandleEndOfDayItemParameters = {
   item: Item
 }
 
-export function handleEndOfDayItem({ item }: handleEndOfDayItemParameters) {
+export function handleEndOfDayItem({ item }: HandleEndOfDayItemParameters) {
+  // Handle Regular Item:
   item = structuredClone(item);
   item = degradeItem({ item, amount: 1 })
   return decrementSellIn({ item, amount: 1 })
-
 }
+
+export type LegendaryItemObject = {
+  name: LegendaryItemNames
+  sellIn: number,
+  quality: number
+}
+
+type HandleLegendaryItemParameter = {
+  item: LegendaryItemObject
+};
+
+export function handleLegendaryItem({ item }: HandleLegendaryItemParameter) {
+  return item
+}
+
+
+

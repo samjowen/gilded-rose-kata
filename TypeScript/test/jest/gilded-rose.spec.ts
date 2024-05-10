@@ -1,4 +1,4 @@
-import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem } from '@/gilded-rose';
+import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem, handleLegendaryItem, LegendaryItemObject } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
   it('should foo', () => {
@@ -20,5 +20,10 @@ describe('Gilded Rose', () => {
   it("handles the end of the day for the regular items (i.e., non edge-cases)", () => {
     const regularItem = new Item("Elixir of the Mongoose", 5, 7);
     expect(handleEndOfDayItem({ item: regularItem })).toEqual(new Item("Elixir of the Mongoose", 4, 6))
+  });
+
+  it("handles the end of the day for a legendary item", () => {
+    const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
+    expect(handleLegendaryItem({ item: sulfuras })).toEqual(new Item("Sulfuras", 0, 80));
   });
 })
