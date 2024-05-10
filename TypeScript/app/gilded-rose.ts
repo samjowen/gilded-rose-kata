@@ -13,6 +13,12 @@ const LEGENDARY_ITEMS = ["Sulfuras"] as const
 
 type LegendaryItemNames = typeof LEGENDARY_ITEMS[number]
 
+type AgedBrieObject = {
+  name: "Aged Brie"
+  sellIn: number
+  quality: number
+}
+
 
 export class GildedRose {
   items: Array<Item>;
@@ -113,6 +119,32 @@ type HandleEndOfDayItemParameters = {
 }
 
 export function handleEndOfDayItem({ item }: HandleEndOfDayItemParameters) {
+  switch (true) {
+    case (item.name === "Aged Brie"):
+      // aged brie increases in quality as it ages
+      return handleAgedBrie({ item: item as AgedBrieObject })
+
+    // fallthrough
+
+  }
+  return handleRegularItem({ item })
+}
+
+export function handleAgedBrie({ item }: HandleAgedBrieParameters) {
+  item = structuredClone(item);
+  item = appreciateItem({ item: item as Item, amount: 1 }) as AgedBrieObject
+  return decrementSellIn({ item: item as Item, amount: 1 }) as Item
+}
+
+export type HandleAgedBrieParameters = {
+  item: AgedBrieObject
+}
+
+export type HandleRegularItemParameters = {
+  item: Item
+}
+
+export function handleRegularItem({ item }: HandleRegularItemParameters) {
   item = structuredClone(item);
   item = degradeItem({ item, amount: 1 })
   return decrementSellIn({ item, amount: 1 })
