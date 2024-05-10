@@ -10,6 +10,8 @@ export class Item {
   }
 }
 
+
+
 export class GildedRose {
   items: Array<Item>;
 
