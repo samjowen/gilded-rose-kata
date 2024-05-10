@@ -178,6 +178,28 @@ export function isBackstagePass(item: Item): Boolean {
   return item.name === "Backstage passes to a TAFKAL80ETC concert"
 }
 
+type HandleBackstagePassParameters = {
+  item: Item
+}
 
+export function handleBackstagePass({ item }: HandleBackstagePassParameters): Item {
+  item = structuredClone(item);
+
+  switch (true) {
+    case (item.sellIn <= 0):
+      item = decrementSellIn({ item, amount: 1 })
+      return { ...item, quality: 0 }
+    case (item.sellIn <= 5):
+      item = appreciateItem({ item, amount: 3 })
+      return decrementSellIn({ item, amount: 1 })
+    case (item.sellIn <= 10):
+      item = appreciateItem({ item, amount: 2 })
+      return decrementSellIn({ item, amount: 1 })
+    default:
+      item = appreciateItem({ item, amount: 1 })
+      return decrementSellIn({ item, amount: 1 })
+
+  }
+}
 
 
