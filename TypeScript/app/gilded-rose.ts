@@ -77,5 +77,5 @@ type DegradeItemParameters = {
 }
 export function degradeItem({ item, amount }: DegradeItemParameters) {
   item = structuredClone(item);
-  return { name: item.name, quality: item.quality - 10, sellIn: item.sellIn }
+  return { name: item.name, quality: item.quality - amount, sellIn: item.sellIn }
 }
