@@ -80,14 +80,16 @@ type DegradeItemParameters = {
 }
 export function degradeItem({ item, amount }: DegradeItemParameters) {
   item = structuredClone(item);
-  return { name: item.name, quality: item.quality - amount, sellIn: item.sellIn }
+  return { ...item, quality: item.quality - amount }
 }
 
 type DecrementSellInParameters = {
   item: Item
   amount: number
 }
+
 export function decrementSellIn({ item, amount }: DecrementSellInParameters) {
+  item = structuredClone(item);
   return { ...item, sellIn: item.sellIn - amount }
 }
 
@@ -95,9 +97,10 @@ type AppreciateItemParameters = {
   item: Item
   amount: number
 }
-export function appreciateItem({ item, amount }: DegradeItemParameters) {
+
+export function appreciateItem({ item, amount }: AppreciateItemParameters) {
   item = structuredClone(item);
-  return { name: item.name, quality: item.quality + amount, sellIn: item.sellIn }
+  return { ...item, quality: item.quality + amount, }
 }
 
 type HandleEndOfDayItemParameters = {
@@ -105,7 +108,6 @@ type HandleEndOfDayItemParameters = {
 }
 
 export function handleEndOfDayItem({ item }: HandleEndOfDayItemParameters) {
-  // Handle Regular Item:
   item = structuredClone(item);
   item = degradeItem({ item, amount: 1 })
   return decrementSellIn({ item, amount: 1 })
@@ -122,7 +124,8 @@ type HandleLegendaryItemParameter = {
 };
 
 export function handleLegendaryItem({ item }: HandleLegendaryItemParameter) {
-  return item
+  item = structuredClone(item);
+  return item;
 }
 
 
