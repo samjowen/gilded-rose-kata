@@ -26,4 +26,10 @@ describe('Gilded Rose', () => {
     const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
     expect(handleLegendaryItem({ item: sulfuras })).toEqual(new Item("Sulfuras", 0, 80));
   });
+
+  it("ensures that quality never goes above 50", () => {
+    // buffer overflow possible here?
+    const runeKiteshield = new Item("Rune Kiteshield", 1, 49)
+    expect(appreciateItem({ item: runeKiteshield, amount: 10 })).toEqual(new Item("Rune Kiteshield", 1, 50))
+  });
 })
