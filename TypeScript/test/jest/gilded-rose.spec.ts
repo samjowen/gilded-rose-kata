@@ -45,4 +45,10 @@ describe('Gilded Rose', () => {
     expect(isItemLegendary(sulfuras, legendaryItems)).toBe(true)
     expect(isItemLegendary(notLegendaryItem, legendaryItems)).toBe(false)
   });
+
+  it("the end of the day function can handle a legendary item", () => {
+    const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
+    expect(handleEndOfDayItem({ item: sulfuras })).toEqual(new Item("Sulfuras", 0, 80))
+  }
+  )
 })
