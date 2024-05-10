@@ -1,4 +1,4 @@
-import { Item, GildedRose, degradeItem } from '@/gilded-rose';
+import { Item, GildedRose, degradeItem, appreciateItem } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
   it('should foo', () => {

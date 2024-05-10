@@ -79,3 +79,12 @@ export function degradeItem({ item, amount }: DegradeItemParameters) {
   item = structuredClone(item);
   return { name: item.name, quality: item.quality - amount, sellIn: item.sellIn }
 }
+
+type AppreciateItemParameters = {
+  item: Item
+  amount: number
+}
+export function appreciateItem({ item, amount }: DegradeItemParameters) {
+  item = structuredClone(item);
+  return { name: item.name, quality: item.quality + amount, sellIn: item.sellIn }
+}
