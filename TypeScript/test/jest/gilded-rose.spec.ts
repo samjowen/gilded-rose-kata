@@ -11,4 +11,9 @@ describe('Gilded Rose', () => {
     const itemToDegrade = new Item("degradable", 1, 50)
     expect(degradeItem({ item: itemToDegrade, amount: 10 })).toEqual(new Item("degradable", 1, 40))
   });
+
+  it("can appreciate an item", () => {
+    const itemToAppreciate = new Item("degradable", 1, 50);
+    expect(appreciateItem({ item: itemToAppreciate, amount: 10 })).toEqual(new Item("degradable", 1, 60))
+  });
 });
