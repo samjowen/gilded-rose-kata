@@ -96,11 +96,16 @@ export function decrementSellIn({ item, amount }: DecrementSellInParameters) {
 type AppreciateItemParameters = {
   item: Item
   amount: number
+  limit?: number
 }
 
-export function appreciateItem({ item, amount }: AppreciateItemParameters) {
+export function appreciateItem({ item, amount, limit = 50 }: AppreciateItemParameters) {
   item = structuredClone(item);
-  return { ...item, quality: item.quality + amount, }
+  const newQuality = item.quality + amount;
+  if (newQuality > limit) {
+    return { ...item, quality: limit }
+  } else
+    return { ...item, quality: item.quality + amount, }
 }
 
 type HandleEndOfDayItemParameters = {

@@ -13,8 +13,8 @@ describe('Gilded Rose', () => {
   });
 
   it("can appreciate an item", () => {
-    const itemToAppreciate = new Item("degradable", 1, 50);
-    expect(appreciateItem({ item: itemToAppreciate, amount: 10 })).toEqual(new Item("degradable", 1, 60))
+    const itemToAppreciate = new Item("appreciatable", 1, 30);
+    expect(appreciateItem({ item: itemToAppreciate, amount: 10 })).toEqual(new Item("appreciatable", 1, 40))
   });
 
   it("handles the end of the day for the regular items (i.e., non edge-cases)", () => {
