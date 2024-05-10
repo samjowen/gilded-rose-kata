@@ -1,4 +1,4 @@
-import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem, handleLegendaryItem, LegendaryItemObject } from '@/gilded-rose';
+import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem, handleLegendaryItem, LegendaryItemObject, isItemLegendary } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
   it('should foo', () => {
@@ -36,5 +36,13 @@ describe('Gilded Rose', () => {
   it("ensured that aged brie goes up in quality as it ages", () => {
     const agedBrie = new Item("Aged Brie", 1, 0);
     expect(handleEndOfDayItem({ item: agedBrie })).toEqual(new Item("Aged Brie", 0, 1))
+  });
+
+  it("can figure out if an item is legendary", () => {
+    const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
+    const notLegendaryItem = new Item("Not Legendary", 0, 80)
+    const legendaryItems = ["Sulfuras"]
+    expect(isItemLegendary(sulfuras, legendaryItems)).toBe(true)
+    expect(isItemLegendary(notLegendaryItem, legendaryItems)).toBe(false)
   });
 })
