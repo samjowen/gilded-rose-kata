@@ -55,4 +55,9 @@ describe('Gilded Rose', () => {
     const item = new Item("Item", 1, 0)
     expect(degradeItem({ item, amount: 10 })).toEqual(new Item("Item", 1, 0))
   });
+
+  it("ensures that we can detect a backstage pass", () => {
+    const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
+    expect(isBackstagePass(backstagePass)).toBe(true)
+  });
 })
