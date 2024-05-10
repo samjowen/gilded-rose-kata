@@ -125,15 +125,13 @@ type HandleEndOfDayItemParameters = {
 export function handleEndOfDayItem({ item }: HandleEndOfDayItemParameters) {
   switch (true) {
     case (item.name === "Aged Brie"):
-      // aged brie increases in quality as it ages
       return handleAgedBrie({ item: item as AgedBrieObject })
     case (isItemLegendary(item, LEGENDARY_ITEMS as unknown as string[])):
       return handleLegendaryItem({ item: item as LegendaryItemObject })
     case (isBackstagePass(item)):
       return handleBackstagePass({ item })
-
-    // fallthrough
-
+    case (isConjured(item)):
+      return handleConjuredItem({ item })
   }
   return handleRegularItem({ item })
 }
