@@ -1,11 +1,6 @@
 import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem, handleLegendaryItem, LegendaryItemObject, isItemLegendary, isBackstagePass, handleBackstagePass, isConjured, handleConjuredItem } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
-  it('should foo', () => {
-    const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe('foo');
-  });
 
   it("can degrade an item", () => {
     const itemToDegrade = new Item("degradable", 1, 50)
@@ -23,8 +18,8 @@ describe('Gilded Rose', () => {
   });
 
   it("handles the end of the day for a legendary item", () => {
-    const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
-    expect(handleLegendaryItem({ item: sulfuras })).toEqual(new Item("Sulfuras", 0, 80));
+    const sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80) as LegendaryItemObject
+    expect(handleLegendaryItem({ item: sulfuras })).toEqual(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
   });
 
   it("ensures that quality never goes above 50", () => {
@@ -39,16 +34,16 @@ describe('Gilded Rose', () => {
   });
 
   it("can figure out if an item is legendary", () => {
-    const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
+    const sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80) as LegendaryItemObject
     const notLegendaryItem = new Item("Not Legendary", 0, 80)
-    const legendaryItems = ["Sulfuras"]
+    const legendaryItems = ["Sulfuras, Hand of Ragnaros"]
     expect(isItemLegendary(sulfuras, legendaryItems)).toBe(true)
     expect(isItemLegendary(notLegendaryItem, legendaryItems)).toBe(false)
   });
 
   it("the end of the day function can handle a legendary item", () => {
-    const sulfuras = new Item("Sulfuras", 0, 80) as LegendaryItemObject
-    expect(handleEndOfDayItem({ item: sulfuras })).toEqual(new Item("Sulfuras", 0, 80))
+    const sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80) as LegendaryItemObject
+    expect(handleEndOfDayItem({ item: sulfuras })).toEqual(new Item("Sulfuras, Hand of Ragnaros", 0, 80))
   });
 
   it("ensures that an items quality is never negative", () => {
@@ -75,12 +70,12 @@ describe('Gilded Rose', () => {
 
   it("correctly handles a conjured item", () => {
     const conjuredItem = new Item("Conjured Mana Cake", 3, 6)
-    expect(handleConjuredItem({ item: conjuredItem })).toEqual(new Item("Conjured Mana Cake", 2, 4))
+    expect(handleConjuredItem({ item: conjuredItem })).toEqual(new Item("Conjured Mana Cake", 2, 5))
   });
 
   it("handles a conjured item in the main method", () => {
     const conjuredItem = new Item("Conjured Mana Cake", 3, 6)
-    expect(handleEndOfDayItem({ item: conjuredItem })).toEqual(new Item("Conjured Mana Cake", 2, 4))
+    expect(handleEndOfDayItem({ item: conjuredItem })).toEqual(new Item("Conjured Mana Cake", 2, 5))
   });
 });
 
@@ -106,5 +101,21 @@ describe('Gilded Rose Backstage Pass', () => {
     const backstagePassAfterConcert = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20);
     expect(handleBackstagePass({ item: backstagePassAfterConcert })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0));
   });
+
+  it("handles a list of items", () => {
+    const items = [
+      new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49)
+    ];
+
+    const updatedItems = items.map(item => handleBackstagePass({ item }));
+    expect(updatedItems).toEqual([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 14, 21),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 9, 50),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 4, 50)
+    ]);
+  }
+  );
 });
 

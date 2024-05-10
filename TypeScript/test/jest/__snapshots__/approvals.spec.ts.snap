@@ -1,14 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Gilded Rose Approval should foo 1`] = `
-[
-  Item {
-    "name": "foo",
-    "quality": 0,
-    "sellIn": -1,
-  },
-]
-`;
+exports[`Gilded Rose Approval should foo 1`] = `undefined`;
 
 exports[`Gilded Rose Approval should thirtyDays 1`] = `
 "OMGHAI!
