@@ -60,9 +60,17 @@ describe('Gilded Rose', () => {
     const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     expect(isBackstagePass(backstagePass)).toBe(true)
   });
+
   it("ensures that the main method can handle a backstage pass", () => {
     const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     expect(handleEndOfDayItem({ item: backstagePass })).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 14, 21))
+  });
+
+  it("can detect a conjured item", () => {
+    const conjuredItem = new Item("Conjured Mana Cake", 3, 6)
+    const regularItem = new Item("Regular Item", 3, 6)
+    expect(isConjured(conjuredItem)).toBe(true)
+    expect(isConjured(regularItem)).toBe(false)
   });
 });
 
