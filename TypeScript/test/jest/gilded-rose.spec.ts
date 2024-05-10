@@ -19,6 +19,6 @@ describe('Gilded Rose', () => {
 
   it("handles the end of the day for the regular items (i.e., non edge-cases)", () => {
     const regularItem = new Item("Elixir of the Mongoose", 5, 7);
-    expect(handleEndOfDayItem(regularItem)).toEqual(new Item("Elixir of the Mongoose", 4, 4))
+    expect(handleEndOfDayItem({ item: regularItem })).toEqual(new Item("Elixir of the Mongoose", 4, 6))
   });
 })

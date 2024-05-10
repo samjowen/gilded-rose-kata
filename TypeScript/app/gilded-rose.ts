@@ -80,6 +80,14 @@ export function degradeItem({ item, amount }: DegradeItemParameters) {
   return { name: item.name, quality: item.quality - amount, sellIn: item.sellIn }
 }
 
+type DecrementSellInParameters = {
+  item: Item
+  amount: number
+}
+export function decrementSellIn({ item, amount }: DecrementSellInParameters) {
+  return { ...item, sellIn: item.sellIn - amount }
+}
+
 type AppreciateItemParameters = {
   item: Item
   amount: number
@@ -87,4 +95,15 @@ type AppreciateItemParameters = {
 export function appreciateItem({ item, amount }: DegradeItemParameters) {
   item = structuredClone(item);
   return { name: item.name, quality: item.quality + amount, sellIn: item.sellIn }
+}
+
+type handleEndOfDayItemParameters = {
+  item: Item
+}
+
+export function handleEndOfDayItem({ item }: handleEndOfDayItemParameters) {
+  item = structuredClone(item);
+  item = degradeItem({ item, amount: 1 })
+  return decrementSellIn({ item, amount: 1 })
+
 }
