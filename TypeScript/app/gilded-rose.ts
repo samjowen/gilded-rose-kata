@@ -86,7 +86,11 @@ type DegradeItemParameters = {
 }
 export function degradeItem({ item, amount }: DegradeItemParameters) {
   item = structuredClone(item);
-  return { ...item, quality: item.quality - amount }
+  const newQuality = item.quality - amount;
+  if (newQuality < 0) {
+    return { ...item, quality: 0 }
+  } else
+    return { ...item, quality: item.quality - amount }
 }
 
 type DecrementSellInParameters = {
