@@ -165,5 +165,9 @@ export function handleLegendaryItem({ item }: HandleLegendaryItemParameter) {
   return item;
 }
 
+export function isItemLegendary(item: Item, legendaryItems: string[]): item is LegendaryItemObject {
+  return legendaryItems.includes(item.name as LegendaryItemNames)
+}
+
 
 
