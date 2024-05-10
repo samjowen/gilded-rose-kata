@@ -1,4 +1,4 @@
-import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem, handleLegendaryItem, LegendaryItemObject, isItemLegendary, isBackstagePass, handleBackstagePass, isConjured } from '@/gilded-rose';
+import { Item, GildedRose, degradeItem, appreciateItem, handleEndOfDayItem, handleLegendaryItem, LegendaryItemObject, isItemLegendary, isBackstagePass, handleBackstagePass, isConjured, handleConjuredItem } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
   it('should foo', () => {

@@ -209,4 +209,13 @@ export function isConjured(item: Item): Boolean {
   return item.name.includes("Conjured")
 }
 
+type HandleConjuredItemParameters = {
+  item: Item
+}
+export function handleConjuredItem({ item }: HandleConjuredItemParameters): Item {
+  item = structuredClone(item);
+  item = degradeItem({ item, amount: 2 })
+  return decrementSellIn({ item, amount: 1 })
+}
+
 
