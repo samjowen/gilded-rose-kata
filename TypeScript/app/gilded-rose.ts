@@ -123,7 +123,8 @@ export function handleEndOfDayItem({ item }: HandleEndOfDayItemParameters) {
     case (item.name === "Aged Brie"):
       // aged brie increases in quality as it ages
       return handleAgedBrie({ item: item as AgedBrieObject })
-
+    case (isItemLegendary(item, LEGENDARY_ITEMS as unknown as string[])):
+      return handleLegendaryItem({ item: item as LegendaryItemObject })
     // fallthrough
 
   }
