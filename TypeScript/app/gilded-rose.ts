@@ -11,7 +11,6 @@ export class Item {
 }
 
 
-
 export class GildedRose {
   items: Array<Item>;
 
@@ -68,4 +67,15 @@ export class GildedRose {
 
     return this.items;
   }
+}
+
+
+// helper functions
+type DegradeItemParameters = {
+  item: Item
+  amount: number
+}
+export function degradeItem({ item, amount }: DegradeItemParameters) {
+  item = structuredClone(item);
+  return { name: item.name, quality: item.quality - 10, sellIn: item.sellIn }
 }
