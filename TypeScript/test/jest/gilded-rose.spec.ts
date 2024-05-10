@@ -32,4 +32,9 @@ describe('Gilded Rose', () => {
     const runeKiteshield = new Item("Rune Kiteshield", 1, 49)
     expect(appreciateItem({ item: runeKiteshield, amount: 10 })).toEqual(new Item("Rune Kiteshield", 1, 50))
   });
+
+  it("ensured that aged brie goes up in quality as it ages", () => {
+    const agedBrie = new Item("Aged Brie", 1, 0);
+    expect(handleEndOfDayItem({ item: agedBrie })).toEqual(new Item("Aged Brie", 0, 1))
+  });
 })
