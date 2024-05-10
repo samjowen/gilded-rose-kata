@@ -77,6 +77,11 @@ describe('Gilded Rose', () => {
     const conjuredItem = new Item("Conjured Mana Cake", 3, 6)
     expect(handleConjuredItem({ item: conjuredItem })).toEqual(new Item("Conjured Mana Cake", 2, 4))
   });
+
+  it("handles a conjured item in the main method", () => {
+    const conjuredItem = new Item("Conjured Mana Cake", 3, 6)
+    expect(handleEndOfDayItem({ item: conjuredItem })).toEqual(new Item("Conjured Mana Cake", 2, 4))
+  });
 });
 
 
