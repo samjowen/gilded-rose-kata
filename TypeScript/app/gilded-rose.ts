@@ -205,4 +205,8 @@ export function handleBackstagePass({ item }: HandleBackstagePassParameters): It
   }
 }
 
+export function isConjured(item: Item): Boolean {
+  return item.name.includes("Conjured")
+}
+
 
